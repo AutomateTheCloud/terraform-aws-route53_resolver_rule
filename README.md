@@ -298,7 +298,7 @@ Description: Everything the module created, in one object, so that other configu
 - `details` - The scope, purpose and environment, each with its `name`, `abbr` (lowercase, words joined by underscores) and `machine` (lowercase letters and numbers only) forms, and the `tags` applied to every resource.
 - `aws` - The `account.id`, and the `region` `name`, `abbr` (such as `use1` for `us-east-1`) and `description`, of the Region the rule is in.
 - `route53_resolver_rule` - The rule: its `id` (use this to associate the rule with a VPC), `arn`, `name`, `domain_name`, `rule_type`, `resolver_endpoint_id`, `target_ip` (each with its `ip`, `ipv6`, `port` and `protocol`), `owner_id`, `share_status` (`NOT_SHARED`, `SHARED_BY_ME` or `SHARED_WITH_ME`), `region`, `tags` and `tags_all`.
-- `ram_resource_share` - The Resource Access Manager (RAM) resource share: its `arn`, `id`, `name`, `allow_external_principals`, `permission_arns`, `region`, `tags` and `tags_all`. `null` without `ram_share`.
+- `ram_resource_share` - The Resource Access Manager (RAM) resource share: its `arn`, `id`, `name`, `allow_external_principals`, `region`, `tags` and `tags_all`. `null` without `ram_share`.
 - `ram_resource_association` - The association of the rule with the resource share: its `id`, `resource_arn`, `resource_share_arn` and `region`. `null` without `ram_share`.
 - `ram_principal_association` - The principals the rule is shared with, keyed like `ram_share.principals`, each with its `id`, `principal`, `resource_share_arn` and `region`. `null` without `ram_share`.
 <!-- END_TF_DOCS -->
