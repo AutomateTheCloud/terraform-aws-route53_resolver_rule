@@ -1,4 +1,4 @@
-# Copyright 2025 Automate the Cloud Inc.
+# Copyright 2026 Automate the Cloud Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 mock_provider "aws" {
@@ -101,5 +101,19 @@ run "share_outputs" {
   assert {
     condition     = aws_ram_resource_association.this[0].resource_share_arn == aws_ram_resource_share.this[0].arn && aws_ram_principal_association.this["security"].resource_share_arn == aws_ram_resource_share.this[0].arn
     error_message = "The associations must use the share's ARN."
+  }
+}
+
+# metadata.ram_resource_share had permission_arns, which AWS fills in when the rule is
+# added to the share, after the share is saved, so the next plan showed the output
+# changing.
+run "permission_arns_left_out_of_metadata" {
+  command = apply
+  variables {
+    ram_share = { principals = { network = "222222222222" } }
+  }
+  assert {
+    condition     = !contains(keys(output.metadata.ram_resource_share), "permission_arns")
+    error_message = "metadata.ram_resource_share must leave out permission_arns."
   }
 }
